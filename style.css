@@ -1,0 +1,88 @@
+/* page resets */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::after, *::before { 
+    box-sizing: inherit;
+}
+
+img,
+picture,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(87, 86, 86) ;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Orbitron', sans-serif;
+    background-image: url(images/wallpaper.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position: fixed;
+    color: white;
+
+}
+
+h1 {
+    align-self: center;
+    font-weight: 700;
+}
+
+.game {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+h3 {
+    margin: 5px 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.selection {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    gap: 5px;
+    padding: 5px;
+}
+
+.selection img {
+    width: 100px;
+    border-radius: 1em;
+}
+
+.player .rock:hover {
+    filter: drop-shadow(1px 1px 10px #dd4b94);
+}
+
+.player .paper:hover {
+    filter: drop-shadow(1px 1px 10px #0d85c2);
+}
+
+.player .scissor:hover {
+    filter: drop-shadow(1px 1px 10px #f9d431);
+}
+
+

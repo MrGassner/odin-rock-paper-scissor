@@ -47,6 +47,9 @@ while (playerCount < 5 && computerCount < 5) {
     }
 }
 
+document.querySelector('#computer').textContent = `Computer: ${computerCount}`
+document.querySelector('#player').textContent = `Player: ${playerCount}`
+
 console.log(`player counter: ${playerCount}`)
 console.log(`computer counter: ${computerCount}`)
 
