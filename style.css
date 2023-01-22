@@ -16,7 +16,7 @@ svg {
 }
 
 body {
-    height: 100vh;
+
     background-color: rgb(87, 86, 86) ;
     margin: 0;
     padding: 0;
@@ -44,6 +44,10 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     padding: 20px 0;
+}
+
+h2 {
+    align-self: center;
 }
 
 h3 {
@@ -75,14 +79,35 @@ h3 {
 
 .player .rock:hover {
     filter: drop-shadow(1px 1px 10px #dd4b94);
+    cursor: pointer;
 }
 
 .player .paper:hover {
     filter: drop-shadow(1px 1px 10px #0d85c2);
+    cursor: pointer;
 }
 
 .player .scissor:hover {
     filter: drop-shadow(1px 1px 10px #f9d431);
+    cursor: pointer;
+}
+
+.computer .playedrock {
+    filter: drop-shadow(1px 1px 10px #dd4b94);
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.computer .playedpaper{
+    filter: drop-shadow(1px 1px 10px #0d85c2);
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.computer .playedscissor {
+    filter: drop-shadow(1px 1px 10px #f9d431);
+    cursor: pointer;
+    transition: all 1s;
 }
 
 
