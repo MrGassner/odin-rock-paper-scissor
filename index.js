@@ -1,60 +1,70 @@
-/* command used so the prompt works on the vscode terminal */
-const prompt = require("prompt-sync")({ sigint: true});
+document.addEventListener('DOMContentLoaded', () => {
 
-const choices = ['rock', 'paper', 'scissor'];
+    document.querySelector('.playerChoice').addEventListener('click', event => getPlayerChoice(event));
+    document.querySelector('#playAgain').addEventListener('click', () => restartGame())
+});
 
-
-function getComputerChoice (choices) {
-    return choices[Math.floor(Math.random() * choices.length)];
+function getPlayerChoice (event) {
+    if (event.target.alt === undefined) return;
+    return playGame(event.target.alt, getComputerChoice())
 };
 
-
-function getPlayerChoice () {
-    return prompt('What is your choice?: ').toLowerCase();
+function getComputerChoice () {
+    const choices = ['rock', 'paper', 'scissor'];
+    let choice = choices[Math.floor(Math.random() * choices.length)];
+    document.querySelector(`.computer .${choice}`).classList.add(`played${choice}`)
+    return choice
 };
 
-
-function playRound(playerSelection, computerSelection) {
-
-    console.log(playerSelection)
-    console.log(computerSelection)
-
-    if (playerSelection === computerSelection) {
-        return 'tie';
-    } else if (playerSelection === 'rock' && computerSelection === 'scissor') {
-        return 'won';
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return 'won';
-    } else if (playerSelection === 'scissor' && computerSelection === 'paper') {
-        return 'won';
-    } else {
-        return 'lose';
-    };
-};
-
-
-let i = 0;
 let playerCount = 0;
 let computerCount = 0;
 
-while (playerCount < 5 && computerCount < 5) {
 
-    let roundPlayed = playRound(getPlayerChoice(), getComputerChoice(choices));
+function playGame(playerChoice, computerChoice) {
 
-    if (roundPlayed === 'won') {
-        playerCount += 1;
-        i += 1;
-    } else if (roundPlayed === 'lose') {
-        computerCount += 1;
-        i += 1;
+    console.log(`Player: ${playerChoice}`)
+    console.log(`Computer: ${computerChoice}`)
+
+    const winner = document.querySelector('.whoWon');    
+
+    if (playerChoice === computerChoice) {
+        winner.innerHTML = 'TIE'
+    } else {
+        switch (playerChoice + computerChoice) {
+            case 'rockscissor':
+                winner.innerHTML = 'Player Won';
+                playerCount += 1;
+                break;
+            case 'paperrock':
+                winner.innerHTML = 'Player Won';
+                playerCount += 1;
+                break;
+            case 'scissorpaper':
+                winner.innerHTML = 'Player Won';
+                playerCount += 1; 
+                break; 
+            default:
+                winner.innerHTML = 'Computer Won';
+                computerCount += 1; 
+        }
     };
-};
 
-console.log(`player counter: ${playerCount}`)
-console.log(`computer counter: ${computerCount}`)
+    document.querySelector('#computerScore').innerHTML = `Computer ${computerCount}`;
+    document.querySelector('#playerScore').innerHTML = `Player ${playerCount}`;
+    document.querySelector(`.played${computerChoice}`).addEventListener('transitionend', event => {
+        event.target.classList.remove(`played${computerChoice}`)
+    });
 
-if (playerCount < computerCount) {
-    console.log("Computer Won")
-} else {
-    console.log("You Won")
+    if (playerCount >= 5 || computerCount >= 5) {
+        document.querySelector('.modal-body').innerHTML = (playerCount > computerCount ? 'You Won!': 'You Lost!');
+        $('#endGame').modal('show');
+    };
+}
+
+
+function restartGame() {
+    playerCount = 0;
+    computerCount = 0;
+    document.querySelector('#computerScore').innerHTML = `Computer ${computerCount}`;
+    document.querySelector('#playerScore').innerHTML = `Player ${playerCount}`;
 };
